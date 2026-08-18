@@ -1,0 +1,92 @@
+@page { size: A4; margin: 1.5cm 1.5cm 2cm 1.5cm; }
+
+body {
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size: 10pt;
+    color: #222;
+    line-height: 1.35;
+}
+
+h1 {
+    font-size: 16pt;
+    color: #1a3a6e;
+    margin: 0 0 4px 0;
+    border-bottom: 2px solid #1a3a6e;
+    padding-bottom: 4px;
+}
+
+h2 {
+    font-size: 12pt;
+    color: #1a3a6e;
+    margin: 14px 0 6px 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2px;
+}
+
+h3 { font-size: 10.5pt; color: #555; margin: 8px 0 4px 0; }
+
+.subtitle {
+    color: #555;
+    font-size: 10pt;
+    margin: 0 0 12px 0;
+}
+
+.meta-box {
+    background: #f4f6fa;
+    border-left: 3px solid #1a3a6e;
+    padding: 6px 10px;
+    margin: 6px 0 14px 0;
+    font-size: 9pt;
+    color: #333;
+}
+
+table.kv { border-collapse: collapse; width: 100%; font-size: 9pt; }
+table.kv td { padding: 2px 6px; vertical-align: top; }
+table.kv td:first-child { color: #666; width: 30%; }
+
+table.fractions {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 9pt;
+    margin: 4px 0 10px 0;
+}
+table.fractions th, table.fractions td {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 3px 6px;
+    text-align: left;
+}
+table.fractions th {
+    background: #f4f6fa;
+    color: #1a3a6e;
+    font-weight: bold;
+}
+
+.conf-strong { color: #1f7a4f; font-weight: bold; }
+.conf-moderate { color: #b08800; font-weight: bold; }
+.conf-weak { color: #a02022; font-weight: bold; }
+.conf-unknown { color: #888; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.cell-image { width: 100%; }
+.cell-image img { width: 100%; height: auto; }
+
+.caveat {
+    background: #fff8e6;
+    border-left: 3px solid #b08800;
+    padding: 6px 10px;
+    margin: 8px 0;
+    font-size: 9pt;
+    color: #6a4f00;
+}
+
+.footer {
+    margin-top: 18px;
+    padding-top: 6px;
+    border-top: 1px solid #ccc;
+    font-size: 8pt;
+    color: #666;
+}
+
+.small { font-size: 8pt; color: #666; }

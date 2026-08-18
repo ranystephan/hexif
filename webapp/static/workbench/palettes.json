@@ -1,0 +1,50 @@
+{
+  "_provenance": {
+    "phenotype": [
+      "Spatial EcoTyper (https://github.com/digitalcytometry/SpatialEcoTyper) was inspected for a phenotype -> hex mapping on 2026-05-12.",
+      "The repo's R/HeatmapView.R is a generic ComplexHeatmap wrapper with no phenotype-name palette; getColors() lives in docs/man only and is not the lab visual language for HEXIF's nine phenotypes.",
+      "Falling back to a hand-curated 10-color palette drawn primarily from the Wong color-blind-safe set (https://www.nature.com/articles/nmeth.1618) plus colorcet glasbey_bw_minc_20-style anchors, with phenotype-name assignment hand-tuned so semantically related calls (CD8 T-cell vs the broader CD45+ immune class; M2-like vs the parent macrophage class) sit in adjacent hue families; the rare-immune classes get the most saturated entries (so they stand out at low zoom over an H&E base).",
+      "no_call is neutral grey #cccccc per spec section 7."
+    ],
+    "marker_prob_viridis": "Matplotlib viridis sampled at t=0.0/0.25/0.5/0.75/1.0; perceptually uniform, colorblind-safe.",
+    "marker_error_diverging": "RdBu_r (cmocean balance), zero=white, +error=red, -error=blue per spec section 7."
+  },
+  "phenotype": {
+    "name": "phenotype",
+    "type": "categorical",
+    "entries": [
+      {"key": "immune_cd45",              "hex": "#0072b2"},
+      {"key": "t_cell_cd45_cd8",          "hex": "#e69f00"},
+      {"key": "tumor_ca9_or_panck",       "hex": "#d55e00"},
+      {"key": "macrophage_cd68_or_cd163", "hex": "#009e73"},
+      {"key": "m2_like_cd68_cd163",       "hex": "#56b4e9"},
+      {"key": "caf_fap_or_asma",          "hex": "#8b4513"},
+      {"key": "proliferating_ki67",       "hex": "#cc79a7"},
+      {"key": "pdl1_positive",            "hex": "#7e2f8e"},
+      {"key": "pdl1_tumor_like",          "hex": "#bcbd22"},
+      {"key": "no_call",                  "hex": "#cccccc"}
+    ]
+  },
+  "marker_prob_viridis": {
+    "name": "marker_prob_viridis",
+    "type": "sequential",
+    "stops": [
+      {"t": 0.0,  "hex": "#440154"},
+      {"t": 0.25, "hex": "#3b528b"},
+      {"t": 0.5,  "hex": "#21918c"},
+      {"t": 0.75, "hex": "#5ec962"},
+      {"t": 1.0,  "hex": "#fde725"}
+    ]
+  },
+  "marker_error_diverging": {
+    "name": "marker_error_diverging",
+    "type": "diverging",
+    "stops": [
+      {"t": 0.0, "hex": "#053061"},
+      {"t": 0.25, "hex": "#4393c3"},
+      {"t": 0.5, "hex": "#f7f7f7"},
+      {"t": 0.75, "hex": "#d6604d"},
+      {"t": 1.0, "hex": "#67001f"}
+    ]
+  }
+}

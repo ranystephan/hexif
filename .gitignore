@@ -1,0 +1,71 @@
+# Python environments and build output
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Test and editor state
+.coverage
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.vscode/
+.idea/
+.DS_Store
+
+# Credentials
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+
+# Research data and derived artifacts
+data/
+datasets/
+bundles/
+runs/
+outputs/
+logs/
+checkpoints/
+wandb/
+presentations/
+paper/
+archive/
+trash/
+*.ckpt
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.pt
+*.pth
+*.safetensors
+*.svs
+*.tif
+*.tiff
+*.ome.tif
+*.ome.tiff
+*.zarr/
+
+# Notebook and document build products
+.ipynb_checkpoints/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+
+# Workbench caches
+webapp/cache/
+.hexif_cache/

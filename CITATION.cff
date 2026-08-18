@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, cite this repository. Article citation metadata will be added after validation."
+title: "HEXIF: cell-level virtual spatial cytometry from H&E"
+abstract: >-
+  Research software for predicting cell-level marker positivity and phenotype
+  labels from H&E image patches and exploring them in a spatial cytometry
+  Workbench.
+type: software
+authors:
+  - family-names: Stephan
+    given-names: Rany
+    affiliation: "Stanford University, Gentles Lab"
+  - family-names: Gentles
+    given-names: Andrew J.
+    affiliation: "Stanford University, Gentles Lab"
+repository-code: "https://github.com/ranystephan/hexif"
+license: Apache-2.0
+version: "0.1.0.dev0"
+keywords:
+  - computational-pathology
+  - spatial-cytometry
+  - cell-phenotyping
+  - multiplex-imaging
+  - H&E

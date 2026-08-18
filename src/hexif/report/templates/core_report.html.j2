@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>HEXIF Workbench — {{ basename }}</title>
+  <style>{{ css }}</style>
+</head>
+<body>
+
+<h1>HEXIF Spatial Cytometry Report</h1>
+<p class="subtitle">{{ basename }} &middot; {{ tissue }} &middot; model {{ model_id }}</p>
+
+<div class="meta-box">
+  <table class="kv">
+    <tr><td>Bundle</td><td>{{ bundle_dir }}</td></tr>
+    <tr><td>Build date</td><td>{{ build_date }}</td></tr>
+    <tr><td>TMA / core</td><td>{{ tma }} / {{ core }}</td></tr>
+    <tr><td>Split</td><td>{{ split }}</td></tr>
+    <tr><td>Cells (after seg + border filter)</td><td>{{ n_cells }}</td></tr>
+    <tr><td>Calibrated thresholds</td><td>{{ threshold_source }}</td></tr>
+    <tr><td>Output framing</td><td>Research-use spatial cytometry estimates &mdash; not for diagnosis.</td></tr>
+  </table>
+</div>
+
+<h2>1. Tissue overview</h2>
+<div class="grid-2">
+  <div class="cell-image"><img src="{{ he_thumb }}" /><p class="small">H&amp;E</p></div>
+  <div class="cell-image"><img src="{{ composition_png }}" /><p class="small">Predicted phenotype composition (donut)</p></div>
+</div>
+
+<h2>2. Marker-positive fractions</h2>
+<div class="grid-2">
+  <div class="cell-image"><img src="{{ marker_bars_png }}" /></div>
+  <div>
+    <table class="fractions">
+      <tr><th>Marker</th><th>Predicted (%)</th>{% if any_truth %}<th>Truth (%)</th>{% endif %}<th>Confidence</th></tr>
+      {% for row in marker_rows %}
+      <tr>
+        <td>{{ row.name }} (ch{{ "%02d"|format(row.channel) }})</td>
+        <td>{{ "%.1f"|format(row.frac_pred * 100) }}</td>
+        {% if any_truth %}<td>{{ ("%.1f"|format(row.frac_truth * 100)) if row.frac_truth is not none else "&mdash;" }}</td>{% endif %}
+        <td class="conf-{{ row.confidence }}">{{ row.confidence }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<h2>3. Phenotype fractions</h2>
+<table class="fractions">
+  <tr><th>Phenotype</th><th>Predicted (%)</th>{% if any_truth %}<th>Truth (%)</th>{% endif %}<th>Confidence</th></tr>
+  {% for row in phenotype_rows %}
+  <tr>
+    <td>{{ row.name }}</td>
+    <td>{{ "%.1f"|format(row.frac_pred * 100) }}</td>
+    {% if any_truth %}<td>{{ ("%.1f"|format(row.frac_truth * 100)) if row.frac_truth is not none else "&mdash;" }}</td>{% endif %}
+    <td class="conf-{{ row.confidence }}">{{ row.confidence }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>4. Spatial architecture</h2>
+<div class="cell-image"><img src="{{ cozi_png }}" /></div>
+<p class="small">Conditional z-score of directional neighbor preference per Nat Comm 2026 (s41467-026-71699-z).
+Positive values: phenotype A's cells preferentially neighbor phenotype B's cells; negative: avoidance.</p>
+
+{% if top_cozi %}
+<h3>Top directional preferences</h3>
+<table class="fractions">
+  <tr><th>Phenotype A</th><th>Phenotype B</th><th>COZI z</th><th>Obs / Exp</th><th>Hotspot IoU</th></tr>
+  {% for r in top_cozi %}
+  <tr>
+    <td>{{ r.phenotype_a }}</td>
+    <td>{{ r.phenotype_b }}</td>
+    <td>{{ "%+.1f"|format(r.z) }}</td>
+    <td>{{ "%.2f"|format(r.obs_over_exp) }}</td>
+    <td>{{ "%.2f"|format(r.hotspot_overlap_iou) if r.hotspot_overlap_iou is not none else "&mdash;" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+{% if pred_maps %}
+<h2>5. Per-marker spatial maps</h2>
+<p class="small">For each marker: H&amp;E (left), CODEX truth raw (middle, per-image normalized), predicted score (right).</p>
+{% for m in pred_maps %}
+<h3>{{ m.name }} (ch{{ "%02d"|format(m.channel) }}) &middot; <span class="conf-{{ m.confidence }}">{{ m.confidence }}</span></h3>
+<div class="grid-3">
+  <div class="cell-image"><img src="{{ m.he }}" /><p class="small">H&amp;E</p></div>
+  <div class="cell-image"><img src="{{ m.codex }}" /><p class="small">CODEX (raw)</p></div>
+  <div class="cell-image"><img src="{{ m.pred }}" /><p class="small">Predicted score</p></div>
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="caveat">
+  <b>Confidence framing.</b> Confidence labels are derived from the
+  calibration artifact recorded above. They summarize held-out performance
+  for the selected model and are not clinical confidence estimates.
+</div>
+
+<div class="footer">
+  HEXIF Spatial Cytometry Workbench &middot; research use only.
+</div>
+
+</body>
+</html>
