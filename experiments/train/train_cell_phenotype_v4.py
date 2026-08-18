@@ -35,6 +35,7 @@ import torch.nn as nn
 
 from hexif.cell_model import (
     ENCODER_CHOICES,
+    ENCODER_REVISIONS,
     CellPhenotypeModel,
     apply_lora_to_vit,
     build_encoder,
@@ -116,6 +117,7 @@ def _build_model(
     n_total = sum(p.numel() for p in model.parameters() if p.requires_grad)
     info: dict[str, Any] = {
         "encoder": args.encoder,
+        "encoder_revision": ENCODER_REVISIONS[args.encoder],
         "encoder_embed_dim": int(encoder.embed_dim),
         "encoder_chs": [int(encoder.embed_dim)],
         "use_gradient_checkpointing": use_ckpt,

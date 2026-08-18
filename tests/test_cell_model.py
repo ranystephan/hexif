@@ -175,9 +175,14 @@ class TestBuildV4Encoder:
         """The exported list of choices must match the keys of the
         internal HF-Hub map. Catches a typo where someone adds a new
         encoder to the map but forgets to expose it."""
-        from hexif.cell_model import _ENCODER_HF_HUB
+        from hexif.cell_model import _ENCODER_HF_HUB, ENCODER_REVISIONS
 
         assert set(ENCODER_CHOICES) == set(_ENCODER_HF_HUB.keys())
+        assert set(ENCODER_CHOICES) == set(ENCODER_REVISIONS.keys())
+        for name in ("uni2", "h_optimus_0"):
+            revision = ENCODER_REVISIONS[name]
+            assert revision is not None and len(revision) == 40
+            assert _ENCODER_HF_HUB[name].endswith(f"@{revision}")
 
     def test_unknown_name_raises(self) -> None:
         with pytest.raises(ValueError, match="unknown v4 encoder"):

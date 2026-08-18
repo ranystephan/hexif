@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.metadata
 import json
 import platform
 import subprocess
@@ -68,6 +69,35 @@ def main() -> int:
         parser.error("artifact names must be unique")
 
     git_status = git_value("status", "--porcelain")
+    packages = {}
+    distributions = (
+        "torch",
+        "torchvision",
+        "numpy",
+        "pandas",
+        "scikit-learn",
+        "timm",
+        "huggingface-hub",
+    )
+    for distribution in distributions:
+        try:
+            packages[distribution] = importlib.metadata.version(distribution)
+        except importlib.metadata.PackageNotFoundError:
+            packages[distribution] = None
+    try:
+        import torch
+
+        torch_environment = {
+            "cuda_build": torch.version.cuda,
+            "cuda_available": torch.cuda.is_available(),
+            "cudnn": torch.backends.cudnn.version(),
+            "gpu_names": [
+                torch.cuda.get_device_name(index) for index in range(torch.cuda.device_count())
+            ],
+        }
+    except ImportError:
+        torch_environment = None
+
     payload = {
         "schema_version": 1,
         "created_utc": datetime.now(timezone.utc).isoformat(),
@@ -80,6 +110,8 @@ def main() -> int:
         "environment": {
             "python": sys.version,
             "platform": platform.platform(),
+            "packages": packages,
+            "torch": torch_environment,
         },
         "artifacts": {
             name: {

@@ -32,6 +32,7 @@ No synthetic scientific data are generated or presented as evidence.
 | [`experiments/train/`](experiments/train/) | Canonical real-data training entry points |
 | [`experiments/eval/`](experiments/eval/) | Canonical held-out evaluation entry point |
 | [`scripts/`](scripts/) | Real-data masks, labels, calibration, and audit utilities |
+| [`requirements/train-cu121-py312.lock`](requirements/train-cu121-py312.lock) | Exact CUDA 12.1 training environment for the real-data rerun |
 | [`webapp/`](webapp/) | Spatial Cytometry Workbench backend and static frontend |
 | [`tests/`](tests/) | Unit and integration tests |
 | [`docs/data-contracts.md`](docs/data-contracts.md) | Required input schemas and privacy boundary |
@@ -51,8 +52,10 @@ provenance review.
 | Build consensus labels | [`scripts/build_codex_cell_consensus_labels.py`](scripts/build_codex_cell_consensus_labels.py) |
 | Audit labels | [`scripts/audit_codex_cell_labels.py`](scripts/audit_codex_cell_labels.py) |
 | Calibrate thresholds | [`scripts/calibrate_codex_cell_phenotypes.py`](scripts/calibrate_codex_cell_phenotypes.py) |
+| Validate cell-training inputs | [`scripts/validate_cell_training_inputs.py`](scripts/validate_cell_training_inputs.py) |
 | Train focal-loss model | [`experiments/train/train_cell_phenotype_v4.py`](experiments/train/train_cell_phenotype_v4.py) |
 | Train asymmetric-loss model | [`experiments/train/train_cell_phenotype_v6.py`](experiments/train/train_cell_phenotype_v6.py) |
+| Submit guarded Sherlock jobs | [`scripts/submit_cell_training.sh`](scripts/submit_cell_training.sh) |
 | Evaluate a checkpoint | [`experiments/eval/eval_cell_phenotype_v4.py`](experiments/eval/eval_cell_phenotype_v4.py) |
 | Build Workbench artifacts | [`src/hexif/pipeline/bundle.py`](src/hexif/pipeline/bundle.py) |
 | Serve the Workbench | [`webapp/workbench_app.py`](webapp/workbench_app.py) |

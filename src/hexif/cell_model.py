@@ -108,9 +108,14 @@ def apply_lora_to_vit(encoder: nn.Module, rank: int, alpha: float) -> int:
 
 
 ENCODER_CHOICES: tuple[str, ...] = ("uni2", "h_optimus_0", "vit_base_smoke")
+ENCODER_REVISIONS: dict[str, str | None] = {
+    "uni2": "d517a8dd47902dd7c308b3c36f63bce47e7b9a43",
+    "h_optimus_0": "b145cc1e6c6b30d3251aa8b1f844e6974188a743",
+    "vit_base_smoke": None,
+}
 _ENCODER_HF_HUB: dict[str, str] = {
-    "uni2": "hf-hub:MahmoodLab/UNI2-h",
-    "h_optimus_0": "hf-hub:bioptimus/H-optimus-0",
+    "uni2": f"hf-hub:MahmoodLab/UNI2-h@{ENCODER_REVISIONS['uni2']}",
+    "h_optimus_0": f"hf-hub:bioptimus/H-optimus-0@{ENCODER_REVISIONS['h_optimus_0']}",
     # Open ViT-Base for smoke + tests. Not a substitute for UNI2 — exists
     # only so the v4 pipeline can be exercised end-to-end without gated
     # HuggingFace access.
@@ -200,7 +205,9 @@ def build_encoder(name: str, *, pretrained: bool = True) -> nn.Module:
             network access).
 
     Returns:
-        A timm ViT module with a populated ``.embed_dim`` attribute. The
+        A timm ViT module with a populated ``.embed_dim`` attribute. Gated
+        production encoders are loaded at the immutable revisions in
+        :data:`ENCODER_REVISIONS`. The
         module is in evaluation mode by default; the caller switches it
         to train mode and applies LoRA via :func:`apply_lora_to_vit`.
 

@@ -54,6 +54,34 @@ python scripts/capture_run_provenance.py --help
 
 Never select a checkpoint using the test split.
 
+### Sherlock Slurm workflow
+
+Use `slurm/train_cell_phenotype.sbatch` for focal-loss v4 or
+asymmetric-loss v6 training. The script requests one GPU with at least 80 GB
+of memory on `owners`, eight CPU cores, 64 GB of host memory, and eight hours.
+Keep cohort paths and run-specific settings outside Git:
+
+```bash
+cp slurm/run.env.example /absolute/private/path/v4-smoke.env
+chmod 600 /absolute/private/path/v4-smoke.env
+# Replace every example value with a reviewed real path or value.
+scripts/submit_cell_training.sh /absolute/private/path/v4-smoke.env
+```
+
+This submits a CPU preflight followed by a GPU job with an `afterok`
+dependency. The GPU cannot start if real-input validation fails. The jobs
+refuse a dirty or unexpected Git commit, relative paths, outputs
+inside the checkout, broken data links, malformed labels, duplicate cells,
+train/validation core overlap, incompatible H&E arrays, and cells without a
+complete patch. It records the resolved command, hardware, logs, GPU
+utilization, input validation, checkpoint, metrics, and artifact hashes under
+`HEXIF_OUTPUT_DIR`.
+
+Run with `HEXIF_SMOKE=1` first. Review the log, validation JSON, GPU memory,
+loss curves, metrics schema, and checkpoint before creating a new production
+environment with `HEXIF_SMOKE=0`. Do not reuse a smoke output directory for
+a production run.
+
 ## 4. Evaluate once on the held-out test split
 
 The retained evaluator reports within-core average-precision lift over a
