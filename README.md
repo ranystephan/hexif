@@ -11,6 +11,35 @@ real-data pipeline has been rerun and its artifacts have passed the checks in
 [`docs/reproducibility.md`](docs/reproducibility.md).
 
 
+## Data availability
+
+The scientific dataset is **not included in this repository**. Raw and derived
+microscopy data are stored outside Git because they are large, access-controlled
+research files; `data/`, `datasets/`, bundles, runs, logs, and checkpoints are
+therefore ignored. A source checkout alone cannot run the scientific pipeline,
+and HEXIF never downloads, generates, or substitutes missing cohort data.
+
+The current rerun is blocked because the source H&E slides and registered image
+arrays have not been recovered. The required external data inventory is:
+
+| Stage | Required external data |
+| --- | --- |
+| Source acquisition | Five H&E whole-slide images: `CCoC 1 TMA.svs`, `CCoC 2 TMA.svs`, `CCoC 3 TMA.svs`, `CCRCC TMA Region 1.svs`, and `CCRCC TMA Region 2.svs` |
+| Source acquisition | Matching raw 53-channel CODEX acquisitions for `ccOC_TMA1`, `ccOC_TMA2`, `ccOC_TMA3`, `ccRCC_TMA1`, and `ccRCC_TMA2` |
+| Assay metadata | Marker/channel list, TMA maps, coded core identifiers, image resolution, orientation, exclusions, and a private TMA-to-file mapping |
+| Registered images | One `<core_id>_HE.npy` and one `<core_id>_CODEX.npy` per accepted core, plus the registration/QC manifest; the frozen train/validation tables currently reference 323 H&E arrays |
+| Cell data | Stable CODEX-derived instance/compartment masks and cell tables containing coded identity, registered-space centroids, marker measurements, and reviewed labels |
+| Splits and calibration | Frozen patient/core-level train, validation, and test assignments; label thresholds, consensus-label provenance, phenotype rules, and calibration artifacts fitted on training data only |
+
+Supplying only the 323 real `*_HE.npy` arrays and the existing frozen cell
+tables is sufficient to resume the guarded cell-model training run. Recovering
+the five source slide/acquisition pairs is preferred because it permits the
+registration, masks, labels, and exclusions to be rebuilt and independently
+validated. Exact schemas and release requirements are defined in
+[`docs/data-contracts.md`](docs/data-contracts.md) and
+[`docs/reproducibility.md`](docs/reproducibility.md).
+
+
 ## What is included
 
 - A multi-task cell model with pathology foundation-model encoders, LoRA
