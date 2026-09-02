@@ -1,8 +1,6 @@
-# Lab development and publication workflow
+# Development workflow
 
-HEXIF is maintained for authorized Gentles Lab research, internal
-collaboration, and preparation of software and artifacts supporting journal
-publications. It is not operated as an open community contribution project.
+HEXIF is maintained for authorized internal research and collaboration.
 Repository access does not grant access to research data or permission to use,
 share, or publish those data.
 
@@ -38,17 +36,16 @@ python -m build
   paths in the same change that replaces them.
 - Comments should explain constraints or intent, not narrate editing history.
 
-## Internal review and publication
+## Review and release
 
 Use a narrow branch, include tests for behavioral changes, and state any change
 to scientific semantics. A lab-authorized reviewer must approve scientific,
 data-handling, or result-bearing changes, and CI must pass before merge.
 
-Manuscript figures, tables, metrics, checkpoints, or demonstration bundles may
-be added only after the independent release review in
-[`docs/reproducibility.md`](docs/reproducibility.md). Authorship, data-use, and
-release decisions follow lab, institutional, protocol, and journal requirements;
-they are not determined by repository activity.
+Figures, tables, metrics, checkpoints, or demonstration bundles may be added
+only after the independent release review in
+[`docs/reproducibility.md`](docs/reproducibility.md). Release decisions must
+satisfy applicable data-use, institutional, and protocol requirements.
 
 Report security, privacy, or data-governance concerns through approved internal
 lab or Stanford channels, never through a public issue containing sensitive
