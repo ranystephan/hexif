@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to file a bug report! Please fill in as much detail as possible.
+        Use this form to document a reproducible issue for internal lab review. Do not include research data, credentials, or private paths.
 
   - type: textarea
     id: summary

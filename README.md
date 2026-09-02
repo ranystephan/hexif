@@ -10,6 +10,10 @@ results, or demonstration bundle. Results will be published only after the
 real-data pipeline has been rerun and its artifacts have passed the checks in
 [`docs/reproducibility.md`](docs/reproducibility.md).
 
+HEXIF is maintained for authorized Gentles Lab research and preparation of
+journal publications. It is not operated as an open community contribution
+project. Access to the code does not confer access to or authorization for the
+underlying research data.
 
 ## Data availability
 
@@ -185,8 +189,9 @@ cite metrics from repository history. The citation metadata in
 [`CITATION.cff`](CITATION.cff) covers the software only; article metadata will
 be added after the manuscript and real-data validation are final.
 
-## License and contributing
+## License and project scope
 
-Code is licensed under Apache-2.0; see [`LICENSE`](LICENSE). Contributions are
-described in [`CONTRIBUTING.md`](CONTRIBUTING.md), and participation is governed
-by [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
+Code is licensed under Apache-2.0; see [`LICENSE`](LICENSE). Internal development
+and publication review are defined in [`DEVELOPMENT.md`](DEVELOPMENT.md). The
+software license applies only to the code: it does not grant access to, or
+permission to use or publish, any underlying research data.

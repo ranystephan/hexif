@@ -114,7 +114,6 @@ full = [
 [project.urls]
 Homepage = "https://github.com/ranystephan/hexif"
 Repository = "https://github.com/ranystephan/hexif"
-Issues = "https://github.com/ranystephan/hexif/issues"
 "Lab Page" = "https://ajglab.org/"
 
 [project.scripts]
@@ -129,8 +128,7 @@ include = [
     "webapp",
     "docs",
     "README.md",
-    "CONTRIBUTING.md",
-    "CODE_OF_CONDUCT.md",
+    "DEVELOPMENT.md",
     "LICENSE",
     "CITATION.cff",
     "pyproject.toml",

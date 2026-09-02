@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest a new feature or enhancement
+description: Record a proposed internal enhancement
 title: "[feat]: "
 labels: ["enhancement"]
 body:
